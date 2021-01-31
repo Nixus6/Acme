@@ -21,9 +21,9 @@ if ($vistasR == "login" || $vistasR == "RegisterPropietary" || $vistasR == "404"
     $lc = new LoginC();
     require_once "app/functions/mainFunction.php";
     $functions = new mainFunction();
-    // if (!isset($_SESSION['id']) || !isset($_SESSION['usuario'])) {
-    //     $lc->Forzar_Cierre_Sesion_C();
-    // }
+    if (!isset($_SESSION['id']) || !isset($_SESSION['usuario'])) {
+        $lc->Forzar_Cierre_Sesion_C();
+    }
 ?>
     <!DOCTYPE html>
 
@@ -39,6 +39,8 @@ if ($vistasR == "login" || $vistasR == "RegisterPropietary" || $vistasR == "404"
         <?php include FOLDER_TEMPLATE . "footer.php"; ?>
 
         <?php include FOLDER_TEMPLATE . "scripts.php"; ?>
+
+        <?php require_once "Scripts/LogoutScript.php";  ?>
 
     </body>
 

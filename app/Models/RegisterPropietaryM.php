@@ -6,18 +6,24 @@ class RegisterPropietaryM extends Conexion
 {
     protected static function Crear_Propietario($datos)
     {
+        $cedula = $datos['Documento'];
+        $nombre = $datos['Nombre'];
+        $apellido = $datos['Apellido'];
+        $direccion = $datos['Direccion'];
+        $telefono = $datos['Telefono'];
+        $ciudad = $datos['Ciudad'];
         // Estructura insert registrar un nuevo usuario
-        $sql = conexion::conectar()->prepare("INSERT INTO usuario (cedula,nombre,apellido,direccion,telefono,ciudad) 
-                values (:Cedula,:Nombre:,Apellido,:Direccion,:Telefono,:Ciudad)");
+        $sql = conexion::conectar()->query("INSERT INTO Usuario (cedula_U, nombre, apellido, direccion, telefono, ciudad) 
+        values ($cedula, $nombre, $apellido, $direccion, $telefono, $ciudad)");
         // Datos en Array
-        $sql->bindParam(":Cedula", $datos['Documento']);
-        $sql->bindParam(":Nombre", $datos['Nombre']);
-        $sql->bindParam(":Apellido", $datos['Apellido']);
-        $sql->bindParam(":Direccion", $datos['Direccion']);
-        $sql->bindParam(":Telefono", $datos['Telefono']);
-        $sql->bindParam(":Ciudad", $datos['Ciudad']);
+        // $sql->bindParam(":Cedula", $datos['Documento']);
+        // $sql->bindParam(":Nombre", $datos['Nombre']);
+        // $sql->bindParam(":Apellido", $datos['Apellido']);
+        // $sql->bindParam(":Direccion", $datos['Direccion']);
+        // $sql->bindParam(":Telefono", $datos['Telefono']);
+        // $sql->bindParam(":Ciudad", $datos['Ciudad']);
         //Ejecutar 
-        $sql->execute();
+        // $sql->execute();
         return $sql;
     }
 
@@ -25,7 +31,7 @@ class RegisterPropietaryM extends Conexion
     {
         // Estructura insert registrar un nuevo usuario
         $sql = conexion::conectar()->prepare("INSERT INTO acceso (usuario,clave,cedula_U,privilegio_id) 
-        values (:Usuario,:Clave,:Cedula,:PLicitaciones,:PCertificaciones,:Acceso)");
+        values (:Usuario,:Clave,:Cedula,:Privilegio)");
         // Datos en Array
         $sql->bindParam(":Usuario", $datos['Usuario']);
         $sql->bindParam(":Clave", $datos['Clave']);

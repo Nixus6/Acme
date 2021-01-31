@@ -17,33 +17,33 @@
     <div style="color:Black;" class="collapse navbar-collapse justify-content-end" id="navigation" style="align-items: center;">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link " href="#" style="text-align: center;">
 
-                    <p style="text-align: center">
-                        <span id="letra" style="margin-right:5px"><?php echo $_SESSION['Nombre_U']; ?></span><span id="letra"><?php echo $_SESSION['Apellido_U']; ?></span>
-                        <br>
-                        <span id="letraP">(<?php echo $_SESSION['Privilegio']; ?>)</span>
-                        <br>
-                    </p>
+                    <span id="letra" style="margin-right:5px"><?php echo $_SESSION['Nombre_U']; ?></span><span id="letra"><?php echo $_SESSION['Apellido_U']; ?></span>
+                    <br>
+                    <span id="letraP">(<?php echo $_SESSION['Privilegio']; ?>)</span>
+                    <br>
+
                 </a>
             </li>
         </ul>
         <ul class="navbar-nav">
-            <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i><img id="photo" src="<?= URL_IMG ?>man-1.png" alt="Logo del Area"></i>
-                <p class="d-lg-none d-md-block">
-                    Account
-                </p>
-                <div class="ripple-container"></div>
-            </a>
-            <div style="margin-right: 20px;" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-                <div class="dropdown-divider"></div>
-                <a id="cerrar" class="dropdown-item" href="<?php echo $functions->encryptation($_SESSION['id']); ?>">
-                    <i class="fas fa-sign-out-alt"> </i>
-                    <p>
-                        <span>Salir</span>
+            <div class="dropdown show">
+                <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i><img id="photo" src="<?= URL_IMG ?>man-1.png" alt="Logo del Area"></i>
+                    <p class="d-lg-none d-md-block">
+                        Account
                     </p>
+                    <div class="ripple-container"></div>
                 </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
+                    <a id="cerrar" class="dropdown-item" href="<?php echo $functions->encryptation($_SESSION['id']); ?>">
+                        <i class="fas fa-sign-out-alt"> </i>
+                        <p>
+                            <span>Salir</span>
+                        </p>
+                    </a>
+                </div>
             </div>
         </ul>
     </div>

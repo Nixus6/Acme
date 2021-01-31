@@ -66,9 +66,10 @@ INSERT INTO `acme`.`acceso`
 VALUES
 ('nmorenoh', 'aGhMWGVhWGpEc2VCakxMc3pOSTJ3UT09', '1001084291', 3);
 
-SELECT * from Usuario;
+SELECT * from Vehiculo;
 
 CREATE TABLE Vehiculo (
+id_Vehiculo SMALLINT AUTO_INCREMENT,
 Placa VARCHAR(100) NOT NULL,
 Color VARCHAR(100) NOT NULL,
 Marca VARCHAR(100) NOT NULL,
@@ -91,6 +92,7 @@ INSERT INTO `acme`.`vehiculo`
 VALUES
 ('AAA-123',
 'Rojo',
+'Ford',
 'Publico',
 '1001084291');
 

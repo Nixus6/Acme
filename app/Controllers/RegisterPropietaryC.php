@@ -2,9 +2,11 @@
 if ($peticionAjax) {
     require_once "../models/RegisterPropietaryM.php";
     require_once "../functions/mainFunction.php";
+    require_once "../Controllers/LoginC.php";
 } else {
     require_once "app/models/RegisterPropietaryM.php";
     require_once "app/functions/mainFunction.php";
+    require_once "app/Controllers/LoginC.php";
 }
 
 class RegisterPropietaryC extends RegisterPropietaryM
@@ -48,7 +50,7 @@ class RegisterPropietaryC extends RegisterPropietaryM
                     "Ciudad" => $ciudad
                 ];
                 $guardarPropietario = RegisterPropietaryM::Crear_Propietario($datosP);
-                if ($guardarPropietario->rowCount() >= 1) {
+                if ($guardarPropietario == true) {
                     $clave = $functions->encryptation($Clave);
                     $dataA = [
                         "Usuario" => $Usuario,
@@ -57,7 +59,9 @@ class RegisterPropietaryC extends RegisterPropietaryM
                         "Privilegio" => 2
                     ];
                     $guardarAcceso = RegisterPropietaryM::Crear_Acceso($dataA);
-                    if ($guardarAcceso->rowCount() >= 1) {
+                    if ($guardarAcceso == true) {
+                        $lc = new LoginC();
+                        $lc->Iniciar_Sesion_Al_Registrar_C($Usuario, $clave);
                         //se loguea
                     } else {
                         RegisterPropietaryM::eliminar_usuario($documento);
