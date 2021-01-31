@@ -22,6 +22,24 @@
 `ciudad`)
 VALUES
 (1001084291,'Nicolas','Moreno','Cra 145 # 145 a 66','3172792776','Bogota D.C');
+INSERT INTO `acme`.`usuario`
+(`cedula_U`,
+`nombre`,
+`apellido`,
+`direccion`,
+`telefono`,
+`ciudad`)
+VALUES
+(1002456789,'Ad','Min','Cra 145 # 145 a 66','3172792776','Bogota D.C');
+INSERT INTO `acme`.`usuario`
+(`cedula_U`,
+`nombre`,
+`apellido`,
+`direccion`,
+`telefono`,
+`ciudad`)
+VALUES
+(1003456789,'Conduc','Tor','Cra 145 # 145 a 66','3172792776','Bogota D.C');
 
 drop table if exists Privilegio;
 CREATE TABLE Privilegio (
@@ -40,7 +58,7 @@ VALUES
 ('Propietario');
 
 
-drop table if exists Acceso;
+drop table if exists Usuario;
 CREATE TABLE Acceso (
 
     id_Acceso SMALLINT AUTO_INCREMENT,
@@ -65,11 +83,27 @@ INSERT INTO `acme`.`acceso`
 `privilegio_id`)
 VALUES
 ('nmorenoh', 'aGhMWGVhWGpEc2VCakxMc3pOSTJ3UT09', '1001084291', 3);
+INSERT INTO `acme`.`acceso`
+(`usuario`,
+`clave`,
+`cedula_U`,
+`privilegio_id`)
+VALUES
+('Admin', 'aGhMWGVhWGpEc2VCakxMc3pOSTJ3UT09', '1002456789', 1);
+INSERT INTO `acme`.`acceso`
+(`usuario`,
+`clave`,
+`cedula_U`,
+`privilegio_id`)
+VALUES
+('Conductor', 'aGhMWGVhWGpEc2VCakxMc3pOSTJ3UT09', '1003456789', 2);
 
-SELECT * from Vehiculo;
+SELECT * from Usuario;
+SELECT * from Acceso;
 
 CREATE TABLE Vehiculo (
 id_Vehiculo SMALLINT AUTO_INCREMENT,
+PRIMARY KEY (id_Vehiculo),
 Placa VARCHAR(100) NOT NULL,
 Color VARCHAR(100) NOT NULL,
 Marca VARCHAR(100) NOT NULL,

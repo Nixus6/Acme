@@ -66,7 +66,7 @@ class LoginC extends LoginM
             return '<script> window.location="' . $url . '"</script>';
         }
     }
-    public function Iniciar_Sesion_Al_Registrar_C($user,$Password)
+    public function Iniciar_Sesion_Al_Registrar_C($user, $Password)
     {
         $functions = new mainFunction();
         $usuario = $functions->limpiar_cadena($user);
@@ -83,42 +83,27 @@ class LoginC extends LoginM
 
         $Acceso = $datosCuenta->fetch();
 
-        if ($Acceso['usuario'] != $usuario) {
-            echo '<script type="text/javascript">
-            alert("Usuario Incorrecto");
-            </script>';
-        } elseif ($Acceso['clave'] != $clave) {
-            echo '<script type="text/javascript">
-            alert("Contraseña Incorrecta");
-            </script>';
-        } elseif ($Acceso['estado'] == "I") {
-            echo '<script type="text/javascript">
-            alert("Se Encuentra Inactivo en La Plataforma");
-            </script>';
-        } else {
+        session_start(['name' => 'SAcme']);
 
-            session_start(['name' => 'SAcme']);
+        //Datos Usuario
+        $DatosSession = LoginM::Consultar_Datos_Usuario_M($Acceso['cedula_U']);
+        $rowS = $DatosSession->fetch();
+        $_SESSION['Nombre_U'] = $rowS['nombre'];
+        $_SESSION['Apellido_U'] = $rowS['apellido'];
 
-            //Datos Usuario
-            $DatosSession = LoginM::Consultar_Datos_Usuario_M($Acceso['cedula_U']);
-            $rowS = $DatosSession->fetch();
-            $_SESSION['Nombre_U'] = $rowS['nombre'];
-            $_SESSION['Apellido_U'] = $rowS['apellido'];
+        //Datos Acceso       
+        $_SESSION['id']  = $Acceso['id_Acceso'];
+        $_SESSION['usuario'] =  $Acceso['usuario'];
+        $_SESSION['cedula'] = $Acceso['cedula_U'];
 
-            //Datos Acceso       
-            $_SESSION['id']  = $Acceso['id_Acceso'];
-            $_SESSION['usuario'] =  $Acceso['usuario'];
-            $_SESSION['cedula'] = $Acceso['cedula_U'];
+        //Datos Privilegio
+        $DatosPrivilegio = $functions->ejecutar_consulta_simple("SELECT privilegio from Privilegio where id_privilegio ='" . $Acceso['privilegio_id'] . "'");
+        $Privilegio = $DatosPrivilegio->fetch();
+        $_SESSION['Privilegio'] = $Privilegio['privilegio'];
 
-            //Datos Privilegio
-            $DatosPrivilegio = $functions->ejecutar_consulta_simple("SELECT privilegio from Privilegio where id_privilegio ='" . $Acceso['privilegio_id'] . "'");
-            $Privilegio = $DatosPrivilegio->fetch();
-            $_SESSION['Privilegio'] = $Privilegio['privilegio'];
+        $url = SERVERURL . "Principal/";
 
-            $url = SERVERURL . "Principal/";
-
-            return '<script> window.location="' . $url . '"</script>';
-        }
+        return '<script> window.location="' . $url . '"</script>';
     }
 
     public function Cerrar_Sesion_C()

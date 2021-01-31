@@ -56,7 +56,7 @@ class RegisterPropietaryC extends RegisterPropietaryM
                         "Usuario" => $Usuario,
                         "Clave" => $clave,
                         "Cedula" => $documento,
-                        "Privilegio" => 2
+                        "Privilegio" => 3
                     ];
                     $guardarAcceso = RegisterPropietaryM::Crear_Acceso($dataA);
                     if ($guardarAcceso == true) {

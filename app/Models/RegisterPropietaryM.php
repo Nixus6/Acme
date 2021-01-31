@@ -6,24 +6,24 @@ class RegisterPropietaryM extends Conexion
 {
     protected static function Crear_Propietario($datos)
     {
-        $cedula = $datos['Documento'];
-        $nombre = $datos['Nombre'];
-        $apellido = $datos['Apellido'];
-        $direccion = $datos['Direccion'];
-        $telefono = $datos['Telefono'];
-        $ciudad = $datos['Ciudad'];
+        // $cedula = $datos['Documento'];
+        // $nombre = $datos['Nombre'];
+        // $apellido = $datos['Apellido'];
+        // $direccion = $datos['Direccion'];
+        // $telefono = $datos['Telefono'];
+        // $ciudad = $datos['Ciudad'];
         // Estructura insert registrar un nuevo usuario
-        $sql = conexion::conectar()->query("INSERT INTO Usuario (cedula_U, nombre, apellido, direccion, telefono, ciudad) 
-        values ($cedula, $nombre, $apellido, $direccion, $telefono, $ciudad)");
+        $sql = conexion::conectar()->prepare("INSERT INTO Usuario (cedula_U, nombre, apellido, direccion, telefono, ciudad) 
+        values (:Cedula, :Nombre, :Apellido, :Direccion, :Telefono, :Ciudad)");
         // Datos en Array
-        // $sql->bindParam(":Cedula", $datos['Documento']);
-        // $sql->bindParam(":Nombre", $datos['Nombre']);
-        // $sql->bindParam(":Apellido", $datos['Apellido']);
-        // $sql->bindParam(":Direccion", $datos['Direccion']);
-        // $sql->bindParam(":Telefono", $datos['Telefono']);
-        // $sql->bindParam(":Ciudad", $datos['Ciudad']);
-        //Ejecutar 
-        // $sql->execute();
+        $sql->bindParam(":Cedula", $datos['Documento']);
+        $sql->bindParam(":Nombre", $datos['Nombre']);
+        $sql->bindParam(":Apellido", $datos['Apellido']);
+        $sql->bindParam(":Direccion", $datos['Direccion']);
+        $sql->bindParam(":Telefono", $datos['Telefono']);
+        $sql->bindParam(":Ciudad", $datos['Ciudad']);
+        // Ejecutar 
+        $sql->execute();
         return $sql;
     }
 
